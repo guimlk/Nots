@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docs Minimalista</title>
+    <style>
+        /* --- CSS (style.css) --- */
+        :root {
+            /* Variáveis para o tema claro */
+            --bg-color: #f8f9fa; /* Fundo mais claro */
+            --editor-bg: #ffffff;
+            --editor-border: #e0e0e0;
+            --toolbar-bg: #f0f2f5; /* Toolbar ligeiramente mais escura que o fundo */
+            --toolbar-border: #e0e0e0;
+            --button-bg: #ffffff;
+            --button-border: #dcdcdc;
+            --button-hover-bg: #e9ecef; /* Suave no hover */
+            --button-hover-border: #ced4da;
+            --button-active-bg: #dee2e6; /* Mais escuro no active */
+            --button-active-border: #adb5bd;
+            --text-color: #343a40; /* Texto quase preto */
+            --placeholder-color: #adb5bd;
+            --header-bg: #e9ecef; /* Header com um tom suave */
+            --header-border: #dee2e6;
+            --header-text-color: #495057;
+            --select-bg: var(--button-bg);
+            --select-border: var(--button-border);
+            --select-text: var(--text-color);
+            --box-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombra sutil */
+            --box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra principal */
+        }
+
+        /* Tema Escuro Padrão (agora renomeado para "dark") */
+        body.dark { /* NOME SIMPLIFICADO: dark */
+            --bg-color: #2b2d31;
+            --editor-bg: #36393f;
+            --editor-border: #4f545c;
+            --toolbar-bg: #202225;
+            --toolbar-border: #4f545c;
+            --button-bg: #40444b;
+            --button-border: #6d757d;
+            --button-hover-bg: #4f545c;
+            --button-hover-border: #7b818a;
+            --button-active-bg: #5f666f;
+            --button-active-border: #8c939b;
+            --text-color: #e0e0e0;
+            --placeholder-color: #9299a3;
+            --header-bg: #202225;
+            --header-border: #4f545c;
+            --header-text-color: #c9ccd0;
+            --select-bg: var(--button-bg);
+            --select-border: var(--button-border);
+            --select-text: var(--text-color);
+            --box-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.2);
+            --box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- NOVOS TEMAS DO ARCO-ÍRIS (com nomes simplificados) --- */
+
+        body.red { /* NOME SIMPLIFICADO: red */
+            --bg-color: #3b2d2d;
+            --editor-bg: #4a3a3a;
+            --editor-border: #6b5a5a;
+            --toolbar-bg: #302424;
+            --toolbar-border: #6b5a5a;
+            --button-bg: #5a4b4b;
+            --button-border: #7e6f6f;
+            --button-hover-bg: #6b5a5a;
+            --button-hover-border: #8c7e7e;
+            --button-active-bg: #7e6f6f;
+            --button-active-border: #9b8c8c;
+            --text-color: #f0e0e0;
+            --placeholder-color: #c0b0b0;
+            --header-bg: #302424;
+            --header-border: #6b5a5a;
+            --header-text-color: #e0d0d0;
+            --select-bg: var(--button-bg);
+            --select-border: var(--button-border);
+            --select-text: var(--text-color);
+            --box-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.2);
+            --box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        body.orange { /* NOME SIMPLIFICADO: orange */
+            --bg-color: #3b332d;
+            --editor-bg: #4a413a;
+            --editor-border: #6b615a;
+            --toolbar-bg: #302924;
+            --toolbar-border: #6b615a;
+            --button-bg: #5a514b;
+            --button-border: #7e756f;
+            --button-hover-bg: #6b615a;
+            --button-hover-border: #8c817e;
+            --button-active-bg: #7e756f;
+            --button-active-border: #9b908c;
+            --text-color: #f0ebe0;
+            --placeholder-color: #c0bcb0;
+            --header-bg: #302924;
+            --header-border: #6b615a;
+            --header-text-color: #e0dbd0;
+            --select-bg: var(--button-bg);
+            --select-border: var(--button-border);
+            --select-text: var(--text-color);
+            --box-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.2);
+            --box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        body.yellow { /* NOME SIMPLIFICADO: yellow */
+            --bg-color: #3b3b2d;
+            --editor-bg: #4a4a3a;
+            --editor-border: #6b6b5a;
+            --toolbar-bg: #303024;
+            --toolbar-border: #6b6b5a;
+            --button-bg: #5a5a4b;
+            --button-border: #7e7e6f;
+            --button-hover-bg: #6b6b5a;
+            --button-hover-border: #8c8c7e;
+            --button-active-bg: #7e7e6f;
+            --button-active-border: #9b9b8c;
+            --text-color: #f0f0e0;
+            --placeholder-color: #c0c0b0;
+            --header-bg: #303024;
+            --header-border: #6b6b5a;
+            --header-text-color: #e0e0d0;
+            --select-bg: var(--button-bg);
+            --select-border: var(--button-border);
+            --select-text: var(--text-color);
+            --box-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.2);
+            --box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        body.green { /* NOME SIMPLIFICADO: green */
+            --bg-color: #2d3b2d;
+            --editor-bg: #3a4a3a;
+            --editor-border: #5a6b5a;
+            --toolbar-bg: #243024;
+            --toolbar-border: #5a6b5a;
+            --button-bg: #4b5a4b;
+            --button-border: #6f7e6f;
+            --button-hover-bg: #5a6b5a;
+            --button-hover-border: #7e8c7e;
+            --button-active-bg: #6f7e6f;
+            --button-active-border: #8c9b8c;
+            --text-color: #e0f0e0;
+            --placeholder-color: #b0c0b0;
+            --header-bg: #243024;
+            --header-border: #5a6b5a;
+            --header-text-color: #d0e0d0;
+            --select-bg: var(--button-bg);
+            --select-border: var(--button-border);
+            --select-text: var(--text-color);
+            --box-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.2);
+            --box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        body.blue { /* NOME SIMPLIFICADO: blue */
+            --bg-color: #262c38;
+            --editor-bg: #303848;
+            --editor-border: #4a5468;
+            --toolbar-bg: #1e242e;
+            --toolbar-border: #4a5468;
+            --button-bg: #3a4455;
+            --button-border: #606b7d;
+            --button-hover-bg: #444f62;
+            --button-hover-border: #6e7a8e;
+            --button-active-bg: #505c70;
+            --button-active-border: #7a869a;
+            --text-color: #e5edf7;
+            --placeholder-color: #a0aab8;
+            --header-bg: #1e242e;
+            --header-border: #4a5468;
+            --header-text-color: #c9d2e0;
+            --select-bg: var(--button-bg);
+            --select-border: var(--button-border);
+            --select-text: var(--text-color);
+            --box-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.2);
+            --box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        body.indigo { /* NOME SIMPLIFICADO: indigo */
+            --bg-color: #312d3b;
+            --editor-bg: #3f3a4a;
+            --editor-border: #5c5a6b;
+            --toolbar-bg: #252430;
+            --toolbar-border: #5c5a6b;
+            --button-bg: #4b4b5a;
+            --button-border: #6f6f7e;
+            --button-hover-bg: #5c5a6b;
+            --button-hover-border: #7e7e8c;
+            --button-active-bg: #6f6f7e;
+            --button-active-border: #8c8c9b;
+            --text-color: #e0e0f0;
+            --placeholder-color: #b0b0c0;
+            --header-bg: #252430;
+            --header-border: #5c5a6b;
+            --header-text-color: #d0d0e0;
+            --select-bg: var(--button-bg);
+            --select-border: var(--button-border);
+            --select-text: var(--text-color);
+            --box-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.2);
+            --box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        body.violet { /* NOME SIMPLIFICADO: violet */
+            --bg-color: #3b2d3b;
+            --editor-bg: #4a3a4a;
+            --editor-border: #6b5a6b;
+            --toolbar-bg: #302430;
+            --toolbar-border: #6b5a6b;
+            --button-bg: #5a4b5a;
+            --button-border: #7e6f7e;
+            --button-hover-bg: #6b5a6b;
+            --button-hover-border: #8c7e8c;
+            --button-active-bg: #7e6f7e;
+            --button-active-border: #9b8c9b;
+            --text-color: #f0e0f0;
+            --placeholder-color: #c0b0c0;
+            --header-bg: #302430;
+            --header-border: #6b5a6b;
+            --header-text-color: #e0d0e0;
+            --select-bg: var(--button-bg);
+            --select-border: var(--button-border);
+            --select-text: var(--text-color);
+            --box-shadow-light: 0 1px 3px rgba(0, 0, 0, 0.2);
+            --box-shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 30px;
+            box-sizing: border-box;
+
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .editor-container {
+            border-radius: 12px;
+            box-shadow: var(--box-shadow-medium);
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+
+            background-color: var(--editor-bg);
+            border: 1px solid var(--editor-border);
+            transition: background-color 0.4s ease;
+        }
+
+        .top-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--header-border);
+            background-color: var(--header-bg);
+            color: var(--header-text-color);
+            font-size: 15px;
+            gap: 15px;
+            flex-wrap: wrap;
+            font-weight: 500;
+        }
+
+        .top-panel .file-name {
+            font-weight: 600;
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .top-panel .options button {
+            background-color: var(--button-bg);
+            border: 1px solid var(--button-border);
+            border-radius: 6px;
+            padding: 8px 14px;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--text-color);
+            transition: all 0.2s ease;
+            margin-left: 8px;
+            box-shadow: var(--box-shadow-light);
+        }
+
+        .top-panel .options button:hover {
+            background-color: var(--button-hover-bg);
+            border-color: var(--button-hover-border);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .top-panel .options button:active {
+            background-color: var(--button-active-bg);
+            border-color: var(--button-active-border);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transform: translateY(1px);
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--toolbar-border);
+            background-color: var(--toolbar-bg);
+            gap: 8px;
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+        }
+
+        .toolbar button {
+            background-color: var(--button-bg);
+            border: 1px solid var(--button-border);
+            border-radius: 6px;
+            padding: 9px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--box-shadow-light);
+        }
+
+        .toolbar button:hover {
+            background-color: var(--button-hover-bg);
+            border-color: var(--button-hover-border);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .toolbar button:active {
+            background-color: var(--button-active-bg);
+            border-color: var(--button-active-border);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transform: translateY(1px);
+        }
+
+        .toolbar button svg {
+            display: block;
+            fill: currentColor;
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Estilo para o input de cor */
+        .toolbar input[type="color"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: transparent;
+            border: 1px solid var(--button-border);
+            border-radius: 6px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            padding: 3px;
+            overflow: hidden;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--box-shadow-light);
+        }
+
+        .toolbar input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        .toolbar input[type="color"]::-webkit-color-swatch {
+            border: none;
+            border-radius: 4px;
+        }
+        .toolbar input[type="color"]::-moz-color-swatch-wrapper {
+            padding: 0;
+        }
+        .toolbar input[type="color"]::-moz-color-swatch {
+            border: none;
+            border-radius: 4px;
+        }
+        .toolbar input[type="color"]:hover {
+            border-color: var(--button-hover-border);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .toolbar input[type="color"]:active {
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para os selects (tamanho e tema) */
+        .toolbar select,
+        .top-panel .options select {
+            background-color: var(--select-bg);
+            border: 1px solid var(--select-border);
+            border-radius: 6px;
+            padding: 9px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--select-text);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+            padding-right: 35px;
+            transition: all 0.2s ease;
+            min-width: 120px;
+            box-shadow: var(--box-shadow-light);
+        }
+
+        .toolbar select:hover,
+        .top-panel .options select:hover {
+            background-color: var(--button-hover-bg);
+            border-color: var(--button-hover-border);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .toolbar select:focus,
+        .top-panel .options select:focus {
+            outline: none;
+            border-color: var(--button-active-border);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+
+        .editor-content {
+            min-height: 550px;
+            max-height: calc(100vh - 250px);
+            padding: 25px 35px;
+            line-height: 1.7;
+            font-size: 17px;
+            outline: none;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-y: auto;
+            color: var(--text-color);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            font-family: Arial, sans-serif;
+        }
+
+        .editor-content p { margin-top: 0.8em; margin-bottom: 0.8em; }
+
+        .editor-content font[face="size-1"] { font-size: 0.8em; }
+        .editor-content font[face="size-2"] { font-size: 1em; }
+        .editor-content font[face="size-3"] { font-size: 1.3em; }
+        .editor-content font[face="size-4"] { font-size: 1.7em; }
+        .editor-content font[face="size-5"] { font-size: 2.2em; }
+
+        .editor-content b, .editor-content strong {
+            font-weight: 700;
+        }
+
+        .editor-content i, .editor-content em {
+            font-style: italic;
+        }
+
+        .editor-content u {
+            text-decoration: underline;
+            text-decoration-thickness: 1.5px;
+            text-underline-offset: 3px;
+        }
+
+        .editor-content[data-placeholder]:empty:before {
+            content: attr(data-placeholder);
+            color: var(--placeholder-color);
+            transition: color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="light"> <div class="editor-container">
+        <div class="top-panel">
+            <span id="fileName" class="file-name">Documento sem título</span>
+            <div class="options">
+                <button id="newDocBtn" title="Novo Documento">Novo</button>
+                <button id="loadDocBtn" title="Carregar Documento">Carregar</button>
+                <button id="saveDocBtn" title="Salvar Documento">Salvar</button>
+                <select id="colorThemeSelect" title="Escolher Tema">
+                    <option value="light">Claro</option>
+                    <option value="dark">Escuro</option> <option value="red">Vermelho</option> <option value="orange">Laranja</option> <option value="yellow">Amarelo</option> <option value="green">Verde</option> <option value="blue">Azul</option> <option value="indigo">Anil</option> <option value="violet">Violeta</option> </select>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <select id="fontSizeSelect" title="Tamanho do Texto">
+                <option value="default">Normal</option>
+                <option value="size-1">Pequeno</option>
+                <option value="size-2">Padrão</option>
+                <option value="size-3">Médio</option>
+                <option value="size-4">Grande</option>
+                <option value="size-5">Enorme</option>
+            </select>
+
+            <button id="boldBtn" title="Negrito">B</button>
+            <button id="italicBtn" title="Itálico">I</button>
+            <button id="underlineBtn" title="Sublinhado">U</button>
+
+            <input type="color" id="colorPicker" title="Cor do Texto" value="#333333">
+            <button id="alignLeftBtn" title="Alinhar à Esquerda">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M4 18h16V20H4zM4 6h16V8H4zM4 12h10v2H4z"/>
+                </svg>
+            </button>
+            <button id="alignCenterBtn" title="Centralizar">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M8 18h8v2H8zM4 6h16V8H4zM4 12h16v2H4z"/>
+                </svg>
+            </button>
+            <button id="alignRightBtn" title="Alinhar à Direita">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M4 18h16V20H4zM4 6h16V8H4zM10 12h10v2H10z"/>
+                </svg>
+            </button>
+            <button id="alignJustifyBtn" title="Justificar">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M4 18h16V20H4zM4 6h16V8H4zM4 12h16v2H4zM4 21h16v2H4z"/>
+                </svg>
+            </button>
+            <button id="undoBtn" title="Desfazer">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M12.5 8C9.81 8 7.37 8.87 5.5 10.33l-1.39-1.39L2 11h7V4l-1.39 1.39C8.87 4.63 9.81 4 10.5 4c2.76 0 5 2.24 5 5s-2.24 5-5 5H4v2h8.5c3.86 0 7-3.14 7-7s-3.14-7-7-7z"/>
+                </svg>
+            </button>
+            <button id="redoBtn" title="Refazer">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                    <path d="M11.5 8C14.19 8 16.63 8.87 18.5 10.33l1.39-1.39L22 11h-7V4l1.39 1.39C15.13 4.63 14.19 4 13.5 4c-2.76 0-5 2.24-5 5s2.24 5 5 5h7v2h-8.5c-3.86 0-7-3.14-7-7s3.14-7-7-7z"/>
+                </svg>
+            </button>
+        </div>
+        <div id="editor" class="editor-content" contenteditable="true" spellcheck="false" data-placeholder="Comece a digitar aqui..."></div>
+    </div>
+
+    <script>
+        // --- JavaScript (script.js) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const editor = document.getElementById('editor');
+            const fileNameSpan = document.getElementById('fileName');
+            const boldBtn = document.getElementById('boldBtn');
+            const italicBtn = document.getElementById('italicBtn');
+            const underlineBtn = document.getElementById('underlineBtn');
+            const fontSizeSelect = document.getElementById('fontSizeSelect');
+            const colorPicker = document.getElementById('colorPicker');
+            const alignLeftBtn = document.getElementById('alignLeftBtn');
+            const alignCenterBtn = document.getElementById('alignCenterBtn');
+            const alignRightBtn = document.getElementById('alignRightBtn');
+            const alignJustifyBtn = document.getElementById('alignJustifyBtn');
+            const undoBtn = document.getElementById('undoBtn');
+            const redoBtn = document.getElementById('redoBtn');
+
+            const newDocBtn = document.getElementById('newDocBtn');
+            const loadDocBtn = document.getElementById('loadDocBtn');
+            const saveDocBtn = document.getElementById('saveDocBtn');
+            const colorThemeSelect = document.getElementById('colorThemeSelect');
+
+            let currentFileName = "Documento sem título";
+            let currentContent = "";
+
+            function applyFormat(command, value = null) {
+                document.execCommand(command, false, value);
+                editor.focus();
+            }
+
+            let lastSelectedFontSize = 'default';
+
+            function applyFontSize(sizeKey) {
+                if (sizeKey === 'default') {
+                    const selection = window.getSelection();
+                    if (selection.rangeCount > 0) {
+                        const range = selection.getRangeAt(0);
+                        const commonAncestor = range.commonAncestorContainer;
+
+                        function removeFontSizeFace(node) {
+                            if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'FONT' && node.hasAttribute('face')) {
+                                const faceValue = node.getAttribute('face');
+                                if (faceValue.startsWith('size-')) {
+                                    if (!node.hasAttribute('color') && !node.style.length) {
+                                        const parent = node.parentNode;
+                                        while (node.firstChild) {
+                                            parent.insertBefore(node.firstChild, node);
+                                        }
+                                        parent.removeChild(node);
+                                    } else {
+                                        node.removeAttribute('face');
+                                        if (node.attributes.length === 0 && !node.style.length) {
+                                            const parent = node.parentNode;
+                                            while (node.firstChild) {
+                                                parent.insertBefore(node.firstChild, node);
+                                            }
+                                            parent.removeChild(node);
+                                        }
+                                    }
+                                }
+                            }
+                            if (node.nodeType === Node.ELEMENT_NODE) {
+                                for (let i = 0; i < node.children.length; i++) {
+                                    removeFontSizeFace(node.children[i]);
+                                }
+                            }
+                        }
+
+                        if (range.collapsed) {
+                            let currentNode = commonAncestor;
+                            while (currentNode && currentNode !== editor) {
+                                if (currentNode.nodeType === Node.ELEMENT_NODE && currentNode.tagName === 'FONT' && currentNode.hasAttribute('face') && currentNode.getAttribute('face').startsWith('size-')) {
+                                    removeFontSizeFace(currentNode);
+                                    break;
+                                }
+                                currentNode = currentNode.parentNode;
+                            }
+                        } else {
+                            const fragment = range.extractContents();
+                            const div = document.createElement('div');
+                            div.appendChild(fragment);
+                            removeFontSizeFace(div);
+                            range.insertNode(div);
+                        }
+                    }
+                } else {
+                    document.execCommand('fontName', false, sizeKey);
+                }
+                lastSelectedFontSize = sizeKey;
+                editor.focus();
+                updateFontSizeSelect();
+            }
+
+            function updatePlaceholder() {
+                if (editor.textContent.trim() === '') {
+                    editor.setAttribute('data-placeholder', 'Comece a digitar aqui...');
+                } else {
+                    editor.removeAttribute('data-placeholder');
+                }
+            }
+
+            function newDocument() {
+                if (editor.innerHTML.trim() !== "" && editor.innerHTML.trim() !== editor.getAttribute('data-placeholder')) {
+                    const confirmNew = confirm("Você tem alterações não salvas. Deseja criar um novo documento e descartá-las?");
+                    if (!confirmNew) {
+                        return;
+                    }
+                }
+                editor.innerHTML = "";
+                currentFileName = "Documento sem título";
+                fileNameSpan.textContent = currentFileName;
+                currentContent = "";
+                updatePlaceholder();
+                lastSelectedFontSize = 'default';
+                updateFontSizeSelect();
+                editor.focus();
+            }
+
+            function saveDocument() {
+                const content = editor.innerHTML;
+                let suggestedName = currentFileName.replace(/\.html$/, '');
+                const newName = prompt("Salvar documento como:", suggestedName);
+                if (newName) {
+                    currentFileName = newName + ".html";
+                    fileNameSpan.textContent = currentFileName;
+                    currentContent = content;
+                    const blob = new Blob([content], { type: 'text/html' });
+                    const a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = currentFileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(a.href);
+                    alert("Documento salvo com sucesso!");
+                }
+            }
+
+            function loadDocument() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'text/html,text/plain';
+                input.onchange = e => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = event => {
+                            editor.innerHTML = event.target.result;
+                            currentFileName = file.name;
+                            fileNameSpan.textContent = currentFileName;
+                            currentContent = editor.innerHTML;
+                            updatePlaceholder();
+                            lastSelectedFontSize = 'default';
+                            updateFontSizeSelect();
+                            editor.focus();
+                            alert(`Documento "${file.name}" carregado com sucesso!`);
+                        };
+                        reader.readAsText(file);
+                    }
+                };
+                input.click();
+            }
+
+            // NOVA FUNÇÃO: Aplica o tema com nomes simplificados
+            function applyTheme(themeName) {
+                // Lista de todas as classes de tema possíveis (agora simplificadas)
+                const themeClasses = ['light', 'dark', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+                
+                // Remove todas as classes de tema existentes no body
+                themeClasses.forEach(cls => document.body.classList.remove(cls));
+                
+                // Adiciona a classe do tema selecionado
+                document.body.classList.add(themeName); // Adiciona diretamente o nome simplificado
+                localStorage.setItem('editorTheme', themeName); // Salva a preferência
+            }
+
+            // --- Inicialização ---
+            const savedTheme = localStorage.getItem('editorTheme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+                colorThemeSelect.value = savedTheme;
+            } else {
+                applyTheme('light'); // Padrão para "light"
+                colorThemeSelect.value = 'light';
+            }
+
+            fileNameSpan.textContent = currentFileName;
+            updatePlaceholder();
+
+            // --- Event Listeners ---
+            boldBtn.addEventListener('click', () => applyFormat('bold'));
+            italicBtn.addEventListener('click', () => applyFormat('italic'));
+            underlineBtn.addEventListener('click', () => applyFormat('underline'));
+            colorPicker.addEventListener('input', () => {
+                applyFormat('foreColor', colorPicker.value);
+            });
+
+            fontSizeSelect.addEventListener('change', () => {
+                const selectedSizeKey = fontSizeSelect.value;
+                applyFontSize(selectedSizeKey);
+            });
+
+            alignLeftBtn.addEventListener('click', () => applyFormat('justifyLeft'));
+            alignCenterBtn.addEventListener('click', () => applyFormat('justifyCenter'));
+            alignRightBtn.addEventListener('click', () => applyFormat('justifyRight'));
+            alignJustifyBtn.addEventListener('click', () => applyFormat('justifyFull'));
+
+            undoBtn.addEventListener('click', () => applyFormat('undo'));
+            redoBtn.addEventListener('click', () => applyFormat('redo'));
+
+            newDocBtn.addEventListener('click', newDocument);
+            loadDocBtn.addEventListener('click', loadDocument);
+            saveDocBtn.addEventListener('click', saveDocument);
+
+            // Event Listener para o seletor de tema
+            colorThemeSelect.addEventListener('change', () => {
+                applyTheme(colorThemeSelect.value);
+            });
+
+            editor.addEventListener('input', updatePlaceholder);
+            editor.addEventListener('blur', updatePlaceholder);
+            editor.addEventListener('focus', () => {
+                if (editor.hasAttribute('data-placeholder')) {
+                    editor.removeAttribute('data-placeholder');
+                }
+            });
+
+            editor.addEventListener('mouseup', updateFontSizeSelect);
+            editor.addEventListener('keyup', updateFontSizeSelect);
+
+            function updateFontSizeSelect() {
+                const selection = window.getSelection();
+                if (!selection.rangeCount || selection.isCollapsed) {
+                    fontSizeSelect.value = lastSelectedFontSize;
+                    return;
+                }
+
+                const range = selection.getRangeAt(0);
+                let currentNode = range.commonAncestorContainer;
+                let foundSizeKey = 'default';
+
+                while (currentNode && currentNode !== editor && currentNode.nodeType === Node.ELEMENT_NODE) {
+                    if (currentNode.tagName === 'FONT' && currentNode.hasAttribute('face')) {
+                        const faceValue = currentNode.getAttribute('face');
+                        if (faceValue.startsWith('size-') && !isNaN(parseInt(faceValue.replace('size-', '')))) {
+                            foundSizeKey = faceValue;
+                            break;
+                        }
+                    }
+                    currentNode = currentNode.parentNode;
+                }
+                fontSizeSelect.value = foundSizeKey;
+                lastSelectedFontSize = foundSizeKey;
+            }
+
+            updateFontSizeSelect();
+        });
+    </script>
+</body>
+</html>
